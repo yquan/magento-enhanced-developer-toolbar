@@ -105,3 +105,11 @@ skin/frontend/default/modern/
 skin/frontend/enterprise
 skin/install/
 var/
+.htaccess
+.htaccess.sample
+api.php
+app/etc/modules/Mage_Api2.xml
+app/etc/modules/Mage_Captcha.xml
+app/etc/modules/Mage_CurrencySymbol.xml
+app/etc/modules/Mage_Oauth.xml
+media/dhl/logo.jpg
