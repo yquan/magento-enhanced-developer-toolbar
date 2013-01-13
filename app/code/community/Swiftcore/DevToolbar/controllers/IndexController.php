@@ -76,8 +76,6 @@ class Swiftcore_DevToolbar_IndexController extends Mage_Core_Controller_Front_Ac
 			$scope_id = Mage::app ()->getStore ()->getStoreId ();
 			$enabled = $this->getRequest ()->getParam ( 'enabled' );
 			Mage::getConfig ()->saveConfig ( 'dev/js/merge_files', $enabled, $scope, $scope_id );
-			if (! Mage::getStoreConfig ( 'dev/js/merge_files' ) || ! Mage::getStoreConfig ( 'dev/developertoolbar/enabled' ))
-				$this->_forward ( 'noRoute' );
 			$this->_redirectReferer ();
 		}
 	}
@@ -87,9 +85,25 @@ class Swiftcore_DevToolbar_IndexController extends Mage_Core_Controller_Front_Ac
 		else {
 			$enabled = $this->getRequest ()->getParam ( 'enabled' );
 			Mage::getConfig ()->saveConfig ( 'web/url/use_store', $enabled );
-			if (! Mage::getStoreConfig ( 'web/url/use_store' ) || ! Mage::getStoreConfig ( 'dev/developertoolbar/enabled' ))
-				$this->_forward ( 'noRoute' );
-			$this->_redirectReferer ();
+			$store = Mage::app()->getStore();
+			$store->setConfig('web/url/use_store', $enabled);
+			$url = $store->getConfig('web/unsecure/base_link_url');
+			
+			// simulate Mage_Core_Model_Store::_updatePathUseRewrites()
+			if(!$store->getConfig('web/seo/use_rewrites')){
+				if((bool)Mage::registry('custom_entry_point')){
+					$indexFileName = 'index.php';
+	            } else {
+	                $indexFileName = basename($_SERVER['SCRIPT_FILENAME']);
+	            }
+	            $url .= $indexFileName . '/';
+			}
+			
+			// simulate Mage_Core_Model_Store::_updatePathUseStoreView()
+			if($enabled){
+				$url .= $store->getCode() . '/';
+			}
+			$this->getResponse()->setRedirect($url);
 		}
 	}
 	public function seoAction() {
@@ -98,8 +112,6 @@ class Swiftcore_DevToolbar_IndexController extends Mage_Core_Controller_Front_Ac
 		else {
 			$enabled = $this->getRequest ()->getParam ( 'enabled' );
 			Mage::getConfig ()->saveConfig ( 'web/seo/use_rewrites', $enabled );
-			if (! Mage::getStoreConfig ( 'web/seo/use_rewrites' ) || ! Mage::getStoreConfig ( 'dev/developertoolbar/enabled' ))
-				$this->_forward ( 'noRoute' );
 			$this->_redirectReferer ();
 		}
 	}
@@ -111,8 +123,6 @@ class Swiftcore_DevToolbar_IndexController extends Mage_Core_Controller_Front_Ac
 			$scope_id = Mage::app ()->getStore ()->getStoreId ();
 			$enabled = $this->getRequest ()->getParam ( 'enabled' );
 			Mage::getConfig ()->saveConfig ( 'dev/translate_inline/active', $enabled, $scope, $scope_id );
-			if (! Mage::getStoreConfig ( 'dev/translate_inline/active' ) || ! Mage::getStoreConfig ( 'dev/developertoolbar/enabled' ))
-				$this->_forward ( 'noRoute' );
 			$this->_redirectReferer ();
 		}
 	}
@@ -127,8 +137,6 @@ class Swiftcore_DevToolbar_IndexController extends Mage_Core_Controller_Front_Ac
 				$enable [$type] = 0;
 			}
 			Mage::app ()->saveUseCache ( $enable );
-			if (! Mage::getStoreConfig ( 'dev/developertoolbar/enabled' ))
-				$this->_forward ( 'noRoute' );
 			$this->_redirectReferer ();
 		}
 	}
