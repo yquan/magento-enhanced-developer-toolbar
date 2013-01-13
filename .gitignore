@@ -27,7 +27,7 @@
 !/app/design/frontend/base/default/layout/swiftcore
 !/app/design/frontend/base/default/template
 /app/design/frontend/base/default/template/*
-!/app/design/frontend/base/default/template/devtoolbar
+!/app/design/frontend/base/default/template/swiftcore
 !/app/skin
 /app/skin/*
 !/app/skin/swiftcore
