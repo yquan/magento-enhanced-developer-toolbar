@@ -1,5 +1,6 @@
 # paths to exclude from ignore:
-#
+
+
 # app/code/community/Swiftcore
 # app/design/frontend/base/default/layout/swiftcore
 # app/design/frontend/base/default/template/swiftcore
