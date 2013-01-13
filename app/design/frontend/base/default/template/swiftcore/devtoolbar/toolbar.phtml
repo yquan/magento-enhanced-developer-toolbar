@@ -1,0 +1,66 @@
+<?php
+$getConfigCustomer = Mage::getStoreConfig('dev/developertoolbar/enablename');
+$getCustomer = Mage::getSingleton('customer/customer')->load(Mage::getSingleton('customer/session')->getId())->getEmail();
+$getCustomerArray = explode(",",$getConfigCustomer);
+
+$getConfigIp = Mage::getStoreConfig('dev/developertoolbar/enableip');
+$getIp = $_SERVER["REMOTE_ADDR"];
+$getIprArray = explode(",",$getConfigIp);
+
+$getConfigIp==""?$checkip=false:$checkip=true;
+$enablename = false;
+for($i=0;$i<sizeof($getCustomerArray);$i++)
+{		
+    if($getCustomer == trim($getCustomerArray[$i]))	
+    {
+        $enablename = true;
+        break;		
+    }		
+}
+
+$getConfigCustomer==""?$checkcustomer=false:$checkcustomer=true;
+
+$enableip = false;
+for($i=0;$i<sizeof($getIprArray);$i++)
+{		
+    if($getIp == trim($getIprArray[$i]))	
+    {
+        $enableip = true;
+        break;		
+    }		
+}
+$case=false;
+if(!$checkip && !$checkcustomer && Mage::getStoreConfig('dev/developertoolbar/enabled')) $case=true;
+
+if($checkip && !$checkcustomer)
+{
+    if(Mage::getStoreConfig('dev/developertoolbar/enabled') && $enableip) $case=true;
+}
+else if(!$checkip && $checkcustomer)
+{
+    if(Mage::getStoreConfig('dev/developertoolbar/enabled') && $enablename) $case=true;
+}
+else if($checkip && $checkcustomer)
+{
+    if(((Mage::getStoreConfig('dev/developertoolbar/enabled') && $enablename)) && ((Mage::getStoreConfig('dev/developertoolbar/enabled') && $enableip))) $case =true;
+}
+    
+if(!$case){
+    exit;
+}else{
+
+?>
+<div class="developertoolbar" id="developertoolbar">
+	<a href="#" onclick="hide_developer_toolbar(); return false;"><span class="bar_name">Developer Toolbar</span></a>
+	<span id="bar_content">
+		<a <?php if (Mage::getStoreConfig('dev/debug/template_hints') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints')!='1'?1:0).'/type/front') ?>">Frontend Hints</a>
+		<a <?php if (Mage::getStoreConfig('dev/debug/template_hints', 0) != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints', 0)!='1'?1:0).'/type/back') ?>">Backend Hints</a>	
+		<a <?php if (Mage::getStoreConfig('dev/log/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/log/enabled/'.(Mage::getStoreConfig('dev/log/active')!='1'?1:0)) ?>">Logs</a>
+		<a <?php if (Mage::getStoreConfig('dev/js/merge_files') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/js/enabled/'.(Mage::getStoreConfig('dev/js/merge_files')!='1'?1:0)) ?>">Merge JS</a>
+		<a <?php if (Mage::getStoreConfig('web/url/use_store') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/url/enabled/'.(Mage::getStoreConfig('web/url/use_store')!='1'?1:0)) ?>">Store Code in Urls</a>
+		<a <?php if (Mage::getStoreConfig('web/seo/use_rewrites') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/seo/enabled/'.(Mage::getStoreConfig('web/seo/use_rewrites')!='1'?1:0)) ?>">SEO Rewrites</a>
+		<a <?php if (Mage::getStoreConfig('dev/translate_inline/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/translate/enabled/'.(Mage::getStoreConfig('dev/translate_inline/active')!='1'?1:0)) ?>">Translate Inline</a>
+		<a style="color:#FF0000;" href="<?php echo $this->getUrl('devtoolbar/index/cache/') ?>">Clean &amp; Disable All Cache</a>
+	</span>
+</div>
+<?php } ?>
