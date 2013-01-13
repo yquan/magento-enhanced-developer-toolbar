@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<block type="core/template" name="developertoolbar_head"
+				template="swiftcore/devtoolbar/toolbar_head.phtml" />
+		</reference>
+		<reference name="before_body_end">
+			<block type="core/template" name="developertoolbar"
+				template="swiftcore/devtoolbar/toolbar.phtml" />
+		</reference>
+	</default>
+</layout>

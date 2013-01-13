@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Swiftcore_DevToolbar>
+            <version>1.0.0</version>
+        </Swiftcore_DevToolbar>
+    </modules>
+    <frontend>
+        <routers>
+            <devtoolbar>
+                <use>standard</use>
+                <args>
+                    <module>Swiftcore_DevToolbar</module>
+                    <frontName>devtoolbar</frontName>
+                </args>
+            </devtoolbar>
+        </routers>       
+        <layout>
+            <updates>
+                <devtoolbar>
+                    <file>swiftcore/devtoolbar.xml</file>
+                </devtoolbar>
+            </updates>
+        </layout>
+    </frontend>  
+	
+	<default>
+		<dev>
+			<developertoolbar>
+				<enabled>1</enabled>
+			</developertoolbar>
+		</dev>
+	</default>
+</config>
