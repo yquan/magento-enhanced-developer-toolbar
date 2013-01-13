@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Swiftcore_DevToolbar>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Swiftcore_DevToolbar>
+    </modules>
+</config>
