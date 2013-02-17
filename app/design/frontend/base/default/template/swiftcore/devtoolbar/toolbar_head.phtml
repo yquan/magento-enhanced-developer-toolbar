@@ -4,19 +4,20 @@
 	left: 0px;
 	bottom: 0px;	
 	width: 100%;
-	text-align: center;
-	background: #0A263C;
-	border-top: 1px solid #415966;	
+	text-align: left;
+	width: 200px;
+	background: #EEE;
 	z-index: 10000;
+	border: 1px solid black;
+	padding: 5px;
 }
+.developertoolbar div.title a{background: none repeat scroll 0 0 #000; display:block; text-align:center; padding: 5px 0;}
 .developertoolbar a {
 	color: #FF822F;
+	width: 200px;
 	font-weight:bold;
 	font-size:11px;
 	text-decoration: none;
-	padding-left: 8px;
-	padding-right: 8px;	
-    border-right:1px solid #415966;
 }
 
 .developertoolbar a:hover {
@@ -27,7 +28,6 @@
 	color: #D96708;
 	font-size: 10px;
 	font-weight:bold;
-	float: left;
 	cursor:pointer;
 	padding-left: 3px;
 }
@@ -49,13 +49,11 @@
 }
 </style>
 <script type="text/javascript">
-function hide_developer_toolbar(){
+function toggle_developer_toolbar(){
 	if (document.getElementById('bar_content').style.display == 'none') {
 		document.getElementById('bar_content').style.display = "inline";
-		document.getElementById('developertoolbar').style.width = "100%";
 	} else {
 		document.getElementById('bar_content').style.display = "none";
-		document.getElementById('developertoolbar').style.width = "100px";
 	}	
 }
 </script>

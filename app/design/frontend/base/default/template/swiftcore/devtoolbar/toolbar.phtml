@@ -51,16 +51,23 @@ if(!$case){
 
 ?>
 <div class="developertoolbar" id="developertoolbar">
-	<a href="#" onclick="hide_developer_toolbar(); return false;"><span class="bar_name">Developer Toolbar</span></a>
-	<span id="bar_content">
-		<a <?php if (Mage::getStoreConfig('dev/debug/template_hints') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints')!='1'?1:0).'/type/front') ?>">Frontend Hints</a>
-		<a <?php if (Mage::getStoreConfig('dev/debug/template_hints', 0) != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints', 0)!='1'?1:0).'/type/back') ?>">Backend Hints</a>	
-		<a <?php if (Mage::getStoreConfig('dev/log/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/log/enabled/'.(Mage::getStoreConfig('dev/log/active')!='1'?1:0)) ?>">Logs</a>
-		<a <?php if (Mage::getStoreConfig('dev/js/merge_files') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/js/enabled/'.(Mage::getStoreConfig('dev/js/merge_files')!='1'?1:0)) ?>">Merge JS</a>
-		<a <?php if (Mage::getStoreConfig('web/url/use_store') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/url/enabled/'.(Mage::getStoreConfig('web/url/use_store')!='1'?1:0)) ?>">Store Code in Urls</a>
-		<a <?php if (Mage::getStoreConfig('web/seo/use_rewrites') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/seo/enabled/'.(Mage::getStoreConfig('web/seo/use_rewrites')!='1'?1:0)) ?>">SEO Rewrites</a>
-		<a <?php if (Mage::getStoreConfig('dev/translate_inline/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/translate/enabled/'.(Mage::getStoreConfig('dev/translate_inline/active')!='1'?1:0)) ?>">Translate Inline</a>
-		<a style="color:#FF0000;" href="<?php echo $this->getUrl('devtoolbar/index/cache/') ?>">Clean &amp; Disable All Cache</a>
-	</span>
+	<div class="title"><a href="javascript:void();" onclick="toggle_developer_toolbar(); return false;"><span class="bar_name">Developer Toolbar</span></a></div>
+	<div><ul id="bar_content">
+		<li><a href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints')!='1'?1:0).'/type/front') ?>">Frontend Hints</a>
+			(<?php if (Mage::getStoreConfig('dev/debug/template_hints') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a <?php if (Mage::getStoreConfig('dev/debug/template_hints', 0) != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/hints/enabled/'.(Mage::getStoreConfig('dev/debug/template_hints', 0)!='1'?1:0).'/type/back') ?>">Backend Hints</a>
+			(<?php if (Mage::getStoreConfig('dev/debug/template_hints') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>	
+		<li><a <?php if (Mage::getStoreConfig('dev/log/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/log/enabled/'.(Mage::getStoreConfig('dev/log/active')!='1'?1:0)) ?>">Logs</a>
+			(<?php if (Mage::getStoreConfig('dev/log/active') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a <?php if (Mage::getStoreConfig('dev/js/merge_files') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/js/enabled/'.(Mage::getStoreConfig('dev/js/merge_files')!='1'?1:0)) ?>">Merge JS</a>
+			(<?php if (Mage::getStoreConfig('dev/js/merge_files') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a <?php if (Mage::getStoreConfig('web/url/use_store') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/url/enabled/'.(Mage::getStoreConfig('web/url/use_store')!='1'?1:0)) ?>">Store Code in Urls</a>
+			(<?php if (Mage::getStoreConfig('web/url/use_store') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a <?php if (Mage::getStoreConfig('web/seo/use_rewrites') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/seo/enabled/'.(Mage::getStoreConfig('web/seo/use_rewrites')!='1'?1:0)) ?>">SEO Rewrites</a>
+			(<?php if (Mage::getStoreConfig('web/seo/use_rewrites') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a <?php if (Mage::getStoreConfig('dev/translate_inline/active') != '1') echo ' class="disabled "'; ?> href="<?php echo $this->getUrl('devtoolbar/index/translate/enabled/'.(Mage::getStoreConfig('dev/translate_inline/active')!='1'?1:0)) ?>">Translate Inline</a>
+			(<?php if (Mage::getStoreConfig('dev/translate_inline/active') != '1'){ ?>off<?php }else{?>on<?php }?>)</li>
+		<li><a href="<?php echo $this->getUrl('devtoolbar/index/cache/') ?>">Clean &amp; Disable All Cache</a>
+	</ul></div>
 </div>
 <?php } ?>
